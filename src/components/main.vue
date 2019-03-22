@@ -188,6 +188,11 @@ export default {
         preview,
         attributes,
         componentTree
+    },
+    provide() {
+    	return {
+      	    oprate: this.oprate
+    	};
     }
 }
 </script>

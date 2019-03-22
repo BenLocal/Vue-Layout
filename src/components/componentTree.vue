@@ -1,7 +1,7 @@
 <template>
     <section>
         <div v-for="c in components">
-            <a @click="click(c.info.id)">
+            <a @click="click(c.info.id)" @contextmenu="contextmenu($event, c.info.id)">
                 <mu-icon @click="show=!show" :value="show?'keyboard_arrow_down':'keyboard_arrow_right'" style="vertical-align:middle;" />
                 {{c.info.name}}</a>
             <div v-for="(slot,key) in c.slots" v-show="show">
@@ -13,7 +13,7 @@
 <script>
 export default {
     name: 'componentTree',
-
+    inject: ["oprate"],
     data() {
         return {
             show: true
@@ -32,6 +32,10 @@ export default {
         click(id) {
             let el = document.getElementById(id)
             el.click()
+        },
+    	contextmenu(e, id) {
+            this.click(id);
+            this.oprate(e);
         }
     }
 }
